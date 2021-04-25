@@ -1,5 +1,5 @@
 def solution(number, k):
-    stack = []
+    stack = {}
     num_list = list(number)
     stack.append(num_list.pop(0))
 
