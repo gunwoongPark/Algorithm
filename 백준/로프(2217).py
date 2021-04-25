@@ -1,19 +1,12 @@
 N = int(input())
+ropes = sorted([int(input()) for _ in range(N)], reverse=True)
 
-ropes = []
+weight, last, count = ropes[0], ropes[0], 1
 
-for idx in range(N):
-    ropes.append(int(input()))
-
-ropes.sort(reverse=True)
-
-weight = ropes[0]
-select = []
-for idx in range(len(ropes)):
-    select.append(ropes[idx])
-    if weight > select[-1] * len(select) :
-        continue
-    else :
-        weight = select[-1] * len(select)
+for rope in ropes[1:]:
+    last, count = rope, count+1
+    next_weight = last * count
+    if weight <= next_weight:
+        weight = next_weight
 
 print(weight)
