@@ -10,13 +10,12 @@ for idx in range(T):
         candidates.append(list(map(int, input().split())))
 
     candidates.sort()
-    rank = candidates[0][1]
+    compared = candidates[0]
     count = 1
-    for candidate in candidates[1:]:
-        if rank > candidate[1]:
-            count += 1
-            rank = candidate[1]
 
-        if rank == 1:
-            break
+    for candidate in candidates[1:]:
+        if candidate[1] < compared[1]:
+            count += 1
+            compared = candidate
+
     print(count)
