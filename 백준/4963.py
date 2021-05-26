@@ -1,38 +1,29 @@
-from collections import deque
 from sys import stdin
+from sys import setrecursionlimit
+setrecursionlimit(10**9)
 
-def BFS(graph, y, x):
-    global count
-    queue = deque()
-    queue.append((x, y))
-
-    # 상 하 좌 우 상좌, 상우, 하좌, 하우
-    dy = [-1, 1, 0, 0, -1, -1, 1, 1]
-    dx = [0, 0, -1, 1, -1, 1, -1, 1]
-
-    while queue:
-        x, y = queue.popleft()
+def DFS(y, x):
+    global graph
+    if x < 0 or y < 0 or x >= w or y >= h:
+        return False
+    if graph[y][x] == 1:
         graph[y][x] = 0
-
-        for idx in range(8):
-            nx = x + dx[idx]
-            ny = y + dy[idx]
-
-            if nx < 0 or ny < 0 or nx >= w or ny >= h:
-                continue
-
-            if graph[ny][nx] == 0:
-                continue
-
-            queue.append((nx, ny))
-
-    count += 1
+        DFS(y-1, x)
+        DFS(y+1, x)
+        DFS(y, x-1)
+        DFS(y, x+1)
+        DFS(y-1, x-1)
+        DFS(y-1, x+1)
+        DFS(y+1, x-1)
+        DFS(y+1, x+1)
+        return True
+    return False
 
 if __name__ == '__main__':
     result = []
     while True:
         w, h = map(int, stdin.readline().split())
-        # 태스트 케이스 종료 조건
+        # 테스트 케이스 종료 조건
         if w == 0 and h == 0:
             break
 
@@ -44,7 +35,8 @@ if __name__ == '__main__':
         for idx in range(h):
             for jdx in range(w):
                 if graph[idx][jdx] == 1:
-                    BFS(graph, idx, jdx)
+                    if DFS( idx, jdx):
+                        count += 1
 
         result.append(count)
 
