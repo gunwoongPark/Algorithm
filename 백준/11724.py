@@ -14,7 +14,7 @@ def DFS(graph, V, visited):
     for i in graph[V]:
         if not visited[i]:
             DFS(graph, i, visited)
-            return True
+    return True
 
 if __name__ == '__main__':
     N, M = map(int, stdin.readline().split())
