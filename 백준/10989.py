@@ -1,21 +1,14 @@
 from sys import stdin
+from sys import stdout
 
 N = int(stdin.readline())
 
-nums = [0]*10001
+nums = {str(i) : 0 for i in range(1, 10001)}
 
 for _ in range(N):
-    nums[int(stdin.readline())] += 1
+    nums[stdin.readline()[:-1]] += 1
 
-nums2 = []
-for idx in range(N):
-    temp = []
-    if nums[idx] != 0:
-        temp.append(idx)
-        temp *= nums[idx]
-        nums2 += temp
-
-s = ""
-for num in nums2:
-    s += (str(num) + '\n')
-print(s)
+for key, val in nums.items():
+    while val:
+        stdout.write(key+"\n")
+        val-=1
