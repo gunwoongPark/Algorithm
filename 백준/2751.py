@@ -1,10 +1,14 @@
-N = int(input())
+from sys import stdin
 
-nums = []
-for _ in range(N):
-    nums.append(int(input()))
+N = int(stdin.readline())
+
+nums = [0] * N
+for idx in range(N):
+    nums[idx] = int(stdin.readline())
 
 nums.sort()
 
+s = ""
 for num in nums:
-    print(num)
+    s += (str(num) + '\n')
+print(s)
